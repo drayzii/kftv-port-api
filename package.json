@@ -5,10 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf ./build && babel server -d build",
-    "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "coverage": "npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage",
-    "coveralls-coverage": "coveralls < lcov.info",
+    "coverage": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=text-lcov | codeclimate-test-reporter",
     "db-migrate": "sequelize db:migrate --env production",
     "db-migrate:dev": "sequelize db:migrate --env development",
     "db-migrate:test": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test",
@@ -51,6 +48,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "codeclimate-test-reporter": "^0.5.1",
     "coveralls": "^3.0.6",
     "eslint": "^6.2.0",
     "eslint-config-airbnb-base": "^14.0.0",
