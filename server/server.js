@@ -1,11 +1,14 @@
 import express from 'express';
 import '@babel/polyfill';
+import cors from "cors";
 import userRoutes from './routes/userRoute';
 import videoRoutes from './routes/videoRoute';
 
 const app = express();
 
 app.use(express.json());
+
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.status(200).json({
