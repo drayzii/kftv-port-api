@@ -11,7 +11,8 @@ class Users {
         message: 'user already exists',
       });
     }
-    const newPassword = await Password.generatePassword(req.body, userService.userCount(req.body.email));
+    const userCount = userService.userCount(req.body.email);
+    const newPassword = await Password.generatePassword(req.body, userCount);
     req.body.password = newPassword;
     const data = await userService.createUser(req.body);
     const token = await generateToken(data.id, data.email);
@@ -23,8 +24,8 @@ class Users {
         id: data.id,
         email: data.email,
         firstName: data.firstName,
-        lastName: data.lastName
-      }
+        lastName: data.lastName,
+      },
     });
   }
 
@@ -43,7 +44,7 @@ class Users {
     if (!match) {
       return res.status(400).send({
         status: 400,
-        message: 'Password is incorrect'
+        message: 'Password is incorrect',
       });
     }
     const { id } = user;
@@ -57,8 +58,8 @@ class Users {
         id: data.id,
         email: data.email,
         firstName: data.firstName,
-        lastName: data.lastName
-      }
+        lastName: data.lastName,
+      },
     });
   }
 }
