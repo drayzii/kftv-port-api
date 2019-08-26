@@ -12,7 +12,7 @@
     "dev": "export NODE_ENV=development && nodemon --exec babel-node ./server/server.js",
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
     "lint": "eslint . --fix --ignore-path .gitignore",
-    "start": "export NODE_ENV=production npm run build && node ./build/server.js",
+    "start": "export NODE_ENV=production npm run build && npm run db-migrate && node ./build/server.js",
     "test": "export NODE_ENV=test && npm run db-migrate:test && nyc mocha --require @babel/register ./server/test/*.js --timeout 60000 --exit"
   },
   "repository": {
