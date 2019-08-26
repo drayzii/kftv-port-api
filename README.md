@@ -1,16 +1,16 @@
-#### KFTV STUDIO PORTOFOLIO
+# KFTV STUDIO PORTOFOLIO
 [![Build Status](https://travis-ci.com/drayzii/kftv-studio-port.svg?token=QJSgEadXdEUhi3SnYStj&branch=develop)](https://travis-ci.com/drayzii/kftv-studio-port)
 [![Coverage Status](https://coveralls.io/repos/github/drayzii/kftv-studio-port/badge.svg?branch=develop)](https://coveralls.io/github/drayzii/kftv-studio-port?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/9d3eb14117a045c43b1d/maintainability)](https://codeclimate.com/github/drayzii/kftv-studio-port/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9d3eb14117a045c43b1d/test_coverage)](https://codeclimate.com/github/drayzii/kftv-studio-port/test_coverage)
 
-### Usage
+## Usage
 
-## Dependencies
+### Dependencies
 
 First install sequelize and sequelize-cli globally then run `npm install`
 
-## .env
+### .env
 
 Create a .env file in root directory and paste in this
 
@@ -24,10 +24,10 @@ CLOUDINARY_API_SECRET=
 ```
 Then fill in.
 
-## Endpoints
+### Endpoints
 
 Start with: 
-```json
+```sh
 api/v1
 ```
 
