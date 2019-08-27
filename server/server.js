@@ -1,14 +1,22 @@
 import express from 'express';
 import '@babel/polyfill';
 import cors from "cors";
+import bodyparser from "body-parser";
 import userRoutes from './routes/userRoute';
 import videoRoutes from './routes/videoRoute';
 
 const app = express();
 
 app.use(express.json());
+app.use(bodyparser.urlencoded({ extended: false }));
 
 app.use(cors());
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.get('/', (req, res) => {
   res.status(200).json({
