@@ -8,7 +8,7 @@ import videoRoutes from './routes/videoRoute';
 const app = express();
 
 app.use(express.json());
-app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use(cors());
 

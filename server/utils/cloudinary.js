@@ -13,7 +13,13 @@ const upload = async (file) => {
   const video = await cloudinary.uploader.upload(file, {
     resource_type: 'video',
     overwrite: true,
-  }, (result) => result);
+  });
+  if (!video) {
+    res.status(500).json({
+      status: 500,
+      message: 'Could not upload image'
+    })
+  }
   return video;
 };
 
