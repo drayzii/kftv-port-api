@@ -31,7 +31,7 @@ class VideoController {
       const [rowsNumber, [{ dataValues }]] = await VideoService.updateVideo(req.params.id, video);
       return res.status(201).json({
         status: 200,
-        message: 'Product successfully updated!',
+        message: 'Description successfully updated!',
         data: dataValues,
       });
     } catch (error) {
