@@ -1,5 +1,5 @@
 import VideoService from '../services/videoService';
-import uploader from '../utils/cloudinary';
+import uploader from '../utils/cloudinaryVideo';
 
 class VideoController {
   static async addVideo(req, res) {
