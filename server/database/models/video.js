@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Video = sequelize.define('Video', {
     description: DataTypes.STRING,
+    category: DataTypes.STRING,
     thumbnail: DataTypes.STRING,
     url: DataTypes.STRING,
   }, {});

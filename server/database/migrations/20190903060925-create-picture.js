@@ -11,6 +11,9 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      category: {
+        type: Sequelize.STRING,
+      },
       url: {
         type: Sequelize.STRING
       },

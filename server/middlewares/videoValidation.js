@@ -5,6 +5,8 @@ class validation {
     const schema = Joi.object().keys({
       description: Joi.string().min(3).max(250).required()
         .error(() => 'You have to enter a valid description'),
+      category:  Joi.string().min(3).max(250).required()
+      .error(() => 'You have to enter a valid category')
     });
     await schema.validate(req.body, (err) => {
       if (err) {
