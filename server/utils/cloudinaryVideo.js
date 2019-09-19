@@ -14,12 +14,6 @@ const upload = async (file) => {
     resource_type: 'video',
     overwrite: true,
   });
-  if (!video) {
-    res.status(500).json({
-      status: 500,
-      message: 'Could not upload image'
-    })
-  }
   return video;
 };
 

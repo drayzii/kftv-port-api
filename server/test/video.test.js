@@ -14,16 +14,18 @@ const regData = {
   password: 'Pass1234',
 };
 
-const video = {
-  description: 'Description Sample',
-};
-
 const updatedvideo = {
   description: 'New Description Sample',
+  category: 'category2'
 };
 
 const invalidDescription = {
   description: 'X',
+};
+
+const invalidCategory = {
+  description: 'New Description Sample',
+  category: 'X'
 };
 
 let token;
@@ -45,7 +47,9 @@ describe('/Add', () => {
   it('should have a valid token', (done) => {
     chai.request(server)
       .post('/api/v1/videos')
-      .send(video)
+      .attach('video', 'server/test/videoplayback.mp4', 'videoplayback.mp4')
+      .field('description', 'New Description Sample')
+      .field('categeory', 'category')
       .end((err, res) => {
         if (err) {
           return done(err);
@@ -58,7 +62,9 @@ describe('/Add', () => {
     chai.request(server)
       .post('/api/v1/videos')
       .set('authorization', `Bearer ${token}`)
-      .send(video)
+      .attach('video', 'server/test/videoplayback.mp4', 'videoplayback.mp4')
+      .field('description', 'New Description Sample')
+      .field('category', 'category')
       .end((err, res) => {
         if (err) {
           return done(err);
@@ -72,6 +78,19 @@ describe('/Add', () => {
       .post('/api/v1/videos')
       .set('authorization', `Bearer ${token}`)
       .send(invalidDescription)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.body.status.should.equal(400);
+        return done();
+      });
+  });
+  it('should enter valid category', (done) => {
+    chai.request(server)
+      .post('/api/v1/videos')
+      .set('authorization', `Bearer ${token}`)
+      .send(invalidCategory)
       .end((err, res) => {
         if (err) {
           return done(err);
@@ -160,6 +179,18 @@ describe('/video', () => {
     it('should get all videos', (done) => {
       chai.request(server)
         .get('/api/v1/videos')
+        .end((err, res) => {
+          if (err) {
+            done(err);
+          }
+          res.body.status.should.equal(200);
+          done();
+        });
+    });
+
+    it('should get all videos by category', (done) => {
+      chai.request(server)
+        .get('/api/v1/videos?category=category')
         .end((err, res) => {
           if (err) {
             done(err);

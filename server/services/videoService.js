@@ -40,6 +40,16 @@ class VideoService {
     }
   }
 
+  static async getAllVideosByCategory(category) {
+    try {
+      return await Video.findAll({
+        where: { category }
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async deleteVideo(id) {
     try {
       return await Video.destroy({

@@ -4,7 +4,6 @@ import cors from "cors";
 import bodyparser from "body-parser";
 import userRoutes from './routes/userRoute';
 import videoRoutes from './routes/videoRoute';
-import pictureRoutes from './routes/pictureRoute';
 
 const app = express();
 
@@ -28,7 +27,6 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/videos', videoRoutes);
-app.use('/api/v1/pictures', pictureRoutes);
 
 
 app.use((req, res) => {

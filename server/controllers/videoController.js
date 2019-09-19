@@ -4,12 +4,10 @@ import uploader from '../utils/cloudinaryVideo';
 class VideoController {
   static async addVideo(req, res) {
     const newVideo = req.body;
-    if (req.files) {
-      const file = req.files.video;
-      const video = await uploader(file.tempFilePath);
-      newVideo.url = video.url;
-      newVideo.thumbnail = video.url.replace('mp4', 'jpg');
-    }
+    const file = req.files.video;
+    const video = await uploader(file.tempFilePath);
+    newVideo.url = video.url;
+    newVideo.thumbnail = video.url.replace('mp4', 'jpg');
     try {
       const createdVideo = await VideoService.addVideo(newVideo);
       return res.status(201).json({
@@ -74,7 +72,12 @@ class VideoController {
   }
 
   static async getAllVideos(req, res) {
-    const allVideos = await VideoService.getAllVideos();
+    let allVideos;
+    if(req.query.category){
+      allVideos = await VideoService.getAllVideosByCategory(req.query.category);
+    } else{
+      allVideos = await VideoService.getAllVideos();
+    }
     res.status(200).json({
       status: 200,
       message: 'Successfully retrieved all Videos',
