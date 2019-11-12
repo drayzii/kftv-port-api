@@ -1,13 +1,8 @@
 import VideoService from '../services/videoService';
-import uploader from '../utils/cloudinaryVideo';
 
 class VideoController {
   static async addVideo(req, res) {
     const newVideo = req.body;
-    const file = req.files.video;
-    const video = await uploader(file.tempFilePath);
-    newVideo.url = video.url;
-    newVideo.thumbnail = video.url.replace('mp4', 'jpg');
     try {
       const createdVideo = await VideoService.addVideo(newVideo);
       return res.status(201).json({
@@ -26,16 +21,16 @@ class VideoController {
   static async updateVideo(req, res) {
     const video = req.body;
     try {
-      const [rowsNumber, [{ dataValues }]] = await VideoService.updateVideo(req.params.id, video);
+      const updates = await VideoService.updateVideo(req.params.id, video);
       return res.status(201).json({
         status: 200,
         message: 'Description successfully updated!',
-        data: dataValues,
+        data: updates,
       });
     } catch (error) {
       return res.status(500).json({
         status: 500,
-        message: error,
+        message: error.message,
       });
     }
   }
@@ -73,9 +68,9 @@ class VideoController {
 
   static async getAllVideos(req, res) {
     let allVideos;
-    if(req.query.category){
+    if (req.query.category) {
       allVideos = await VideoService.getAllVideosByCategory(req.query.category);
-    } else{
+    } else {
       allVideos = await VideoService.getAllVideos();
     }
     res.status(200).json({
