@@ -59,12 +59,21 @@ describe('/Add', () => {
       });
   });
   it('should add a new video', (done) => {
+    const data = {
+      description: 'Sample videos',
+      category: 'Trailers',
+      thumbnail: 'www.google.com',
+      url: 'www.google.com/images',
+    }
+
     chai.request(server)
       .post('/api/v1/videos')
+      .set('Accept', 'application/json')
       .set('authorization', `Bearer ${token}`)
-      .attach('video', 'server/test/videoplayback.mp4', 'videoplayback.mp4')
-      .field('description', 'New Description Sample')
-      .field('category', 'category')
+      .send(data)
+      // .attach('video', 'server/test/videoplayback.mp4', 'videoplayback.mp4')
+      // .field('description', 'New Description Sample')
+      // .field('category', 'category')
       .end((err, res) => {
         if (err) {
           return done(err);

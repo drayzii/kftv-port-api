@@ -5,8 +5,35 @@ class validation {
     const schema = Joi.object().keys({
       description: Joi.string().min(3).max(250).required()
         .error(() => 'You have to enter a valid description'),
-      category:  Joi.string().min(3).max(250).required()
-      .error(() => 'You have to enter a valid category')
+      category: Joi.string().min(3).max(250).required()
+        .error(() => 'You have to enter a valid category'),
+      thumbnail: Joi.string().min(3).max(250)
+        .error(() => 'You have to supply a valid link for thumbnail'),
+      url: Joi.string().min(3).max(250).required()
+        .error(() => 'You have to supply a valid link'),
+    });
+    await schema.validate(req.body, (err) => {
+      if (err) {
+        res.status(400).json({
+          status: 400,
+          message: err.details[0].message,
+        });
+      } else {
+        next();
+      }
+    });
+  }
+
+  static async onUpdateVideoValidation(req, res, next) {
+    const schema = Joi.object().keys({
+      description: Joi.string().min(3).max(250)
+        .error(() => 'You have to enter a valid description'),
+      category: Joi.string().min(3).max(250)
+        .error(() => 'You have to enter a valid category'),
+      thumbnail: Joi.string().min(3).max(250)
+        .error(() => 'You have to supply a valid link for thumbnail'),
+      url: Joi.string().min(3).max(250)
+        .error(() => 'You have to supply a valid link'),
     });
     await schema.validate(req.body, (err) => {
       if (err) {

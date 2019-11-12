@@ -13,7 +13,7 @@ router.use(fileupload({
 router.post('/', checkAuth, validation.videoValidation, videoController.addVideo);
 router.get('/', videoController.getAllVideos);
 router.get('/:id', validation.videoIdValidate, videoController.viewVideo);
-router.patch('/:id', checkAuth, validation.videoValidation, validation.videoIdValidate, videoController.updateVideo);
+router.patch('/:id', checkAuth, validation.onUpdateVideoValidation, videoController.updateVideo);
 router.delete('/:id', checkAuth, validation.videoIdValidate, videoController.deleteVideo);
 
 export default router;
