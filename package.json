@@ -45,10 +45,12 @@
     "googleapis": "^45.0.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.0.0",
+    "open": "^7.0.0",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.16.0",
     "sequelize-cli": "^5.5.0",
+    "server-destroy": "^1.0.1",
     "youtube-video-api": "^0.3.7"
   },
   "devDependencies": {
