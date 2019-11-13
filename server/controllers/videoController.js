@@ -1,9 +1,15 @@
 import VideoService from '../services/videoService';
+// import {runSample} from '../utils/youtubeUploader';
+import upload from '../utils/cloudinaryVideo';
 
 class VideoController {
   static async addVideo(req, res) {
     const newVideo = req.body;
     try {
+      const file = req.files.video;
+      const video = await upload(file.tempFilePath);
+      newVideo.url = video.url;
+      newVideo.thumbnail = video.url.replace('mp4', 'jpg');
       const createdVideo = await VideoService.addVideo(newVideo);
       return res.status(201).json({
         status: 201,
@@ -13,7 +19,7 @@ class VideoController {
     } catch (error) {
       return res.status(500).json({
         status: 500,
-        message: error,
+        message: error.message,
       });
     }
   }
