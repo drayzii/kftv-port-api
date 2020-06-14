@@ -220,6 +220,28 @@ Response:
 }
 ```
 
+9. Creating an enquiry: POST request
+
+```json
+/enquiries/new
+```
+Request:
+```json
+
+{
+    "names":"alex",
+    "email":"alex@gmail.com",
+    "message": "Can you do movie shoots"
+}
+```
+Response:
+```json
+{
+    "status": 201,
+    "message": "Enquiry created"
+}
+```
 ## Contributors
 
 - Jonathan Shyaka
+- Alain Christian

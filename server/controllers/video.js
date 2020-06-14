@@ -1,4 +1,4 @@
-import VideoService from '../services/videoService';
+import VideoService from '../services/video';
 // import {runSample} from '../utils/youtubeUploader';
 import upload from '../utils/cloudinaryVideo';
 

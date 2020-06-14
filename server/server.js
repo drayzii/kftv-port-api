@@ -1,9 +1,10 @@
 import express from 'express';
 import '@babel/polyfill';
-import cors from "cors";
-import bodyparser from "body-parser";
-import userRoutes from './routes/userRoute';
-import videoRoutes from './routes/videoRoute';
+import cors from 'cors';
+import bodyparser from 'body-parser';
+import users from './routes/user';
+import videos from './routes/video';
+import enquiries from './routes/enquiries';
 
 const app = express();
 
@@ -13,8 +14,8 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
@@ -25,8 +26,9 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use('/api/v1/auth', userRoutes);
-app.use('/api/v1/videos', videoRoutes);
+app.use('/api/v1/auth', users);
+app.use('/api/v1/videos', videos);
+app.use('/api/v1/enquiries', enquiries);
 
 
 app.use((req, res) => {
