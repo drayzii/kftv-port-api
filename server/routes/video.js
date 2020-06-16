@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import fileupload from 'express-fileupload';
 import checkAuth from '../middlewares/checkAuth';
-import videoController from '../controllers/videoController';
-import validation from '../middlewares/videoValidation';
+import videoController from '../controllers/video';
+import validation from '../middlewares/video';
 
 const router = Router();
 

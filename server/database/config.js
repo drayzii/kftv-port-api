@@ -8,10 +8,10 @@ module.exports = {
   },
   production: {
     use_env_variable: 'DATABASE_URL',
-    dialect: 'postgres',
+    dialect: 'mysql',
   },
   test: {
     use_env_variable: 'TEST_DATABASE_URL',
-    dialect: 'postgres',
+    dialect: 'mysql',
   },
 };

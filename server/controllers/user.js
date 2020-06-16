@@ -1,5 +1,5 @@
 import Password from '../utils/generatePassword';
-import userService from '../services/userService';
+import userService from '../services/user';
 import generateToken from '../utils/generateToken';
 
 class Users {
@@ -32,13 +32,11 @@ class Users {
   static async signin(req, res) {
     const { email, password } = req.body;
     const userExist = await userService.getUser(email);
-    if (!userExist)
-      return res.status(404).send({ status: 404, message: 'user not found' });
+    if (!userExist) return res.status(404).send({ status: 404, message: 'user not found' });
     const user = { ...userExist.dataValues };
     const hashedPassword = user.password;
     const match = await Password.checkPasswordMatch(hashedPassword, password);
-    if (!match)
-      return res.status(400).send({ status: 400, message: 'Password is incorrect', });
+    if (!match) return res.status(400).send({ status: 400, message: 'Password is incorrect' });
     const { id } = user;
     const token = generateToken(id, email);
     delete user.password;

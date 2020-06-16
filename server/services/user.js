@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import database from '../database/models/index';
 
 const { User } = database;

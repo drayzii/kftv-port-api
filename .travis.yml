@@ -18,3 +18,11 @@ after_success:
 env:
   global:
     -CODECLIMATE_REPO_TOKEN=1fdbd27f1c37fceea08d760e3e7e9c3519ce6aff574f77b3605cd9cd36faa3c9
+    -CLOUDINARY_NAME=n3m3sis
+    -CLOUDINARY_API_KEY=753921582627338
+    -CLOUDINARY_API_SECRET=9cRopngbP802ohZ4PcRozSGoQhI
+    -SMTP_HOST=smtp.sendgrid.net
+    -SMTP_PORT=25
+    -SENDGRID_USER=apikey
+    -SENDGRID_PASS=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
+    

@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-undef */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
@@ -16,7 +17,7 @@ const regData = {
 
 const updatedvideo = {
   description: 'New Description Sample',
-  category: 'category2'
+  category: 'category2',
 };
 
 const invalidDescription = {
@@ -25,41 +26,30 @@ const invalidDescription = {
 
 const invalidCategory = {
   description: 'New Description Sample',
-  category: 'X'
+  category: 'X',
 };
 
 let token;
 
-before('should create a new user', (done) => {
+before('should create a new user', () => {
   chai.request(server)
     .post('/api/v1/auth/signup')
     .send(regData)
-    .end((err, res) => {
-      if (err) {
-        return done(err);
-      }
+    .then((err, res) => {
       token = res.body.data.token;
-      res.body.status.should.equal(201);
-      return done();
+      return res.body.status.should.equal(201);
     });
 });
 describe('/Add', () => {
-  it('should have a valid token', (done) => {
+  it('should have a valid token', () => {
     chai.request(server)
       .post('/api/v1/videos')
       .attach('video', 'server/test/videoplayback.mp4', 'videoplayback.mp4')
       .field('description', 'New Description Sample')
       .field('categeory', 'category')
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.status.should.equal(401);
-        return done();
-      });
+      .then((err, res) => res.body.status.should.equal(401));
   });
-  it('should add a new video', (done) => {
-
+  it('should add a new video', () => {
     chai.request(server)
       .post('/api/v1/videos')
       .set('Accept', 'application/json')
@@ -67,139 +57,73 @@ describe('/Add', () => {
       .attach('video', 'server/test/videoplayback.mp4', 'videoplayback.mp4')
       .field('description', 'New Description Sample')
       .field('category', 'category')
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.status.should.equal(201);
-        return done();
-      });
+      .then((err, res) => res.body.status.should.equal(201));
   });
-  it('should enter valid description', (done) => {
+  it('should enter valid description', () => {
     chai.request(server)
       .post('/api/v1/videos')
       .set('authorization', `Bearer ${token}`)
       .send(invalidDescription)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.status.should.equal(400);
-        return done();
-      });
+      .then((err, res) => res.body.status.should.equal(400));
   });
-  it('should enter valid category', (done) => {
+  it('should enter valid category', () => {
     chai.request(server)
       .post('/api/v1/videos')
       .set('authorization', `Bearer ${token}`)
       .send(invalidCategory)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.status.should.equal(400);
-        return done();
-      });
+      .then((err, res) => res.body.status.should.equal(400));
   });
 });
 describe('/Update', () => {
-  it('should have a valid token', (done) => {
+  it('should have a valid token', () => {
     chai.request(server)
       .patch('/api/v1/videos/1')
       .send(updatedvideo)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.status.should.equal(401);
-        return done();
-      });
+      .then((err, res) => res.body.status.should.equal(401));
   });
-  it('should update video', (done) => {
+  it('should update video', () => {
     chai.request(server)
       .patch('/api/v1/videos/1')
       .set('authorization', `Bearer ${token}`)
       .send(updatedvideo)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.status.should.equal(200);
-        return done();
-      });
+      .then((err, res) => res.body.status.should.equal(200));
   });
-  it('should enter valid description', (done) => {
+  it('should enter valid description', () => {
     chai.request(server)
       .patch('/api/v1/videos/1')
       .set('authorization', `Bearer ${token}`)
       .send(invalidDescription)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.status.should.equal(400);
-        return done();
-      });
+      .then((err, res) => res.body.status.should.equal(400));
   });
 });
 describe('/video', () => {
   describe('/View', () => {
-    it('should view a video', (done) => {
+    it('should view a video', () => {
       chai.request(server)
         .get('/api/v1/videos/1')
-        .end((err, res) => {
-          if (err) {
-            return done(err);
-          }
-          res.body.status.should.equal(200);
-          return done();
-        });
+        .then((err, res) => res.body.status.should.equal(200));
     });
-    it('should enter valid id', (done) => {
+    it('should enter valid id', () => {
       chai.request(server)
         .get('/api/v1/videos/facebook')
-        .end((err, res) => {
-          if (err) {
-            return done(err);
-          }
-          res.body.status.should.equal(400);
-          return done();
-        });
+        .then((err, res) => res.body.status.should.equal(400));
     });
-    it('should not return video which does not exist', (done) => {
+    it('should not return video which does not exist', () => {
       chai.request(server)
         .get('/api/v1/videos/200')
-        .end((err, res) => {
-          if (err) {
-            return done(err);
-          }
-          res.body.status.should.equal(404);
-          return done();
-        });
+        .then((err, res) => res.body.status.should.equal(404));
     });
 
-    it('should get all videos', (done) => {
+    it('should get all videos', () => {
       chai.request(server)
         .get('/api/v1/videos')
-        .end((err, res) => {
-          if (err) {
-            done(err);
-          }
-          res.body.status.should.equal(200);
-          done();
-        });
+        .then((err, res) => res.body.status.should.equal(200));
     });
 
-    it('should get all videos by category', (done) => {
+    it('should get all videos by category', () => {
       chai.request(server)
         .get('/api/v1/videos?category=category')
-        .end((err, res) => {
-          if (err) {
-            done(err);
-          }
-          res.body.status.should.equal(200);
-          done();
-        });
+        .then((err, res) => res.body.status.should.equal(200));
     });
   });
 });

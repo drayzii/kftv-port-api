@@ -70,86 +70,85 @@ const invalidPassword = {
 
 describe('User', () => {
   describe('creates an account', () => {
-    it('with invaild properties', (done) => {
-      chai.request(server).post(signupUrl).send(regData).end((_err, res) => {
-        expect(res.status).to.eq(201);
-        done();
-      });
+    it('with invaild properties', () => {
+      chai
+        .request(server)
+        .post(signupUrl).send(regData).then((_err, res) => expect(res.status).to.eq(201));
     });
-    it('with invaild first name', (done) => {
-      chai.request(server).post(signupUrl).send(regDataWrongFirstName).end((_err, res) => {
-        expect(res.status).to.eq(400);
-        done();
-      });
+    it('with invaild first name', () => {
+      chai
+        .request(server)
+        .post(signupUrl)
+        .send(regDataWrongFirstName).then((_err, res) => expect(res.status).to.eq(400));
     });
-    it('with invaild last name', (done) => {
-      chai.request(server).post(signupUrl).send(regDataWrongLastName).end((_err, res) => {
-        expect(res.status).to.eq(400);
-        done();
-      });
+    it('with invaild last name', () => {
+      chai
+        .request(server)
+        .post(signupUrl)
+        .send(regDataWrongLastName).then((_err, res) => expect(res.status).to.eq(400));
     });
-    it('with invaild email', (done) => {
-      chai.request(server).post(signupUrl).send(regDataWrongEmail).end((_err, res) => {
-        expect(res.status).to.eq(400);
-        done();
-      });
+    it('with invaild email', () => {
+      chai
+        .request(server)
+        .post(signupUrl)
+        .send(regDataWrongEmail).then((_err, res) => expect(res.status).to.eq(400));
     });
-    it('with invaild password', (done) => {
-      chai.request(server).post(signupUrl).send(regDataWrongPassword).end((_err, res) => {
-        expect(res.status).to.eq(400);
-        done();
-      });
+    it('with invaild password', () => {
+      chai
+        .request(server)
+        .post(signupUrl)
+        .send(regDataWrongPassword).then((_err, res) => expect(res.status).to.eq(400));
     });
   });
 
   describe('sign in', () => {
-    it('should signin successfully', (done) => {
-      chai.request(server).post(signinUrl).send(signin).end((_err, res) => {
-        expect(res.status).to.eq(200);
-        done();
-      });
+    it('should signin successfully', () => {
+      chai
+        .request(server)
+        .post(signinUrl)
+        .send(signin).then((_err, res) => expect(res.status).to.eq(200));
     });
 
-    it('should not signin without email', (done) => {
-      chai.request(server).post(signinUrl).send(noEmail).end((_err, res) => {
-        expect(res.status).to.eq(400);
-        done();
-      });
+    it('should not signin without email', () => {
+      chai
+        .request(server)
+        .post(signinUrl)
+        .send(noEmail).then((_err, res) => expect(res.status).to.eq(400));
     });
 
-    it('should not signin without password', (done) => {
-      chai.request(server).post(signinUrl).send(noPassword).end((_err, res) => {
-        expect(res.status).to.eq(400);
-        done();
-      });
+    it('should not signin without password', () => {
+      chai
+        .request(server)
+        .post(signinUrl)
+        .send(noPassword).then((_err, res) => expect(res.status).to.eq(400));
     });
 
-    it('should not signin an unregistered user', (done) => {
-      chai.request(server).post(signinUrl).send(wrongEmail).end((_err, res) => {
-        expect(res.status).to.eq(404);
-        done();
-      });
+    it('should not signin an unregistered user', () => {
+      chai
+        .request(server)
+        .post(signinUrl)
+        .send(wrongEmail).then((_err, res) => expect(res.status).to.eq(404));
     });
 
-    it('should not signin with a wrong password', (done) => {
-      chai.request(server).post(signinUrl).send(wrongPassword).end((_err, res) => {
-        expect(res.status).to.eq(400);
-        done();
-      });
+    it('should not signin with a wrong password', () => {
+      chai
+        .request(server)
+        .post(signinUrl)
+        .send(wrongPassword).then((_err, res) => expect(res.status).to.eq(400));
     });
 
-    it('should not signin with invalid email', (done) => {
-      chai.request(server).post(signinUrl).send(invalidEmail).end((_err, res) => {
-        expect(res.status).to.eq(400);
-        done();
-      });
+    it('should not signin with invalid email', () => {
+      chai
+        .request(server)
+        .post(signinUrl)
+        .send(invalidEmail).then((_err, res) => expect(res.status).to.eq(400));
     });
 
-    it('should not signin with invalid password', (done) => {
-      chai.request(server).post(signinUrl).send(invalidPassword).end((_err, res) => {
-        expect(res.status).to.eq(400);
-        done();
-      });
+    it('should not signin with invalid password', () => {
+      chai
+        .request(server)
+        .post(signinUrl)
+        .send(invalidPassword).then((_err, res) => expect(res.status).to.eq(400));
     });
   });
 });
