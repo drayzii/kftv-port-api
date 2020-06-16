@@ -13,7 +13,7 @@
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
     "lint": "eslint . --fix --ignore-path .gitignore",
     "start": "export NODE_ENV=production npm run build && npm run db-migrate && node ./build/server.js",
-    "test": "set NODE_ENV=test && npm run db-migrate:test && nyc mocha --require @babel/register ./server/test/*.js --timeout 10000 --exit"
+    "test": "export NODE_ENV=test && npm run db-migrate:test && nyc mocha --require @babel/register ./server/test/*.js --timeout 10000 --exit"
   },
   "repository": {
     "type": "git",
