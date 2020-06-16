@@ -8,32 +8,18 @@ chai.should();
 chai.use(chaiHttp);
 
 describe('/Homepage', () => {
-  it('should return a welcome message', (done) => {
+  it('should return a welcome message', () => {
     chai
       .request(server)
       .get('/')
       .send()
-      .then((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.status.should.equal(200);
-        return done();
-      })
-      .catch(done);
+      .then((err, res) => res.body.status.should.equal(200));
   });
-  it('should return page unknown', (done) => {
+  it('should return page unknown', () => {
     chai
       .request(server)
       .get('/unknown')
       .send()
-      .then((err, res) => {
-        if (err) {
-          return done(err);
-        }
-        res.body.status.should.equal(404);
-        return done();
-      })
-      .catch(done);
+      .then((err, res) => res.body.status.should.equal(404));
   });
 });

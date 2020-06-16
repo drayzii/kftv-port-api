@@ -25,42 +25,27 @@ const withWrongInfo = {
 };
 
 describe('/contact-us', () => {
-  it('should create an enquiry', (done) => {
+  it('should create an enquiry', () => {
     chai
       .request(server)
       .post(newEnquiryUrl)
       .send(withCorrectInfo)
-      .then((err, res) => {
-        if (err) return done(err);
-        res.body.status.should.equal(201);
-        done();
-      })
-      .catch(done);
+      .then((err, res) => res.body.status.should.equal(201));
   });
 
-  it('should not create an enquiry with wrong info', (done) => {
+  it('should not create an enquiry with wrong info', () => {
     chai
       .request(server)
       .post(newEnquiryUrl)
       .send(withWrongInfo)
-      .then((err, res) => {
-        if (err) return done(err);
-        res.body.status.should.equal(422);
-        return done();
-      })
-      .catch(done);
+      .then((err, res) => res.body.status.should.equal(422));
   });
 
-  it('should not create an enquiry with missing info', (done) => {
+  it('should not create an enquiry with missing info', () => {
     chai
       .request(server)
       .post(newEnquiryUrl)
       .send(withMissingInfo)
-      .then((err, res) => {
-        if (err) return done(err);
-        res.body.status.should.equal(422);
-        return done();
-      })
-      .catch(done);
+      .then((err, res) => res.body.status.should.equal(422));
   });
 });
